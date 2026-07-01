@@ -7,12 +7,14 @@ import ServiceCard from './componants/ServiceCard.jsx';
 import Ourwork from './componants/Ourwork.jsx';
 import Teams from './componants/Teams.jsx';
 import ContactUs from './componants/ContactUs.jsx';
+import {Toaster} from 'react-hot-toast'
 const App = () => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light');
 
 
   return (
     <div>
+      <Toaster/>
       <Navbar theme={theme} setTheme={setTheme} />
       <Hero />
       <TrustedBy />

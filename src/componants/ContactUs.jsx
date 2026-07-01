@@ -1,8 +1,37 @@
 import React from 'react'
 import Title from './Title'
 import assets from '../assets/assets.js'
+import { toast } from 'react-hot-toast'
 
 const ContactUs = () => {
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", "e3af8b16-15b7-4976-971f-ed9d47bc84b2");
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) { 
+        toast.success("thak you for submission")
+        event.target.reset();
+      } else {
+        toast.error(data.message)
+      }
+
+    }
+    catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <div
       id="contact"
@@ -13,7 +42,7 @@ const ContactUs = () => {
         desc="We would love to hear from you! Please fill out the form below and we will get back to you as soon as possible."
       />
 
-      <form className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
+      <form onSubmit={onSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
         <div>
           <p className="mb-2 text-sm font-medium">Your Name</p>
 
@@ -26,6 +55,7 @@ const ContactUs = () => {
 
             <input
               type="text"
+              name="name"
               placeholder="Enter your name"
               className="w-full py-3 bg-transparent outline-none text-sm text-gray-800 dark:text-white placeholder:text-gray-400"
               required
@@ -45,6 +75,7 @@ const ContactUs = () => {
 
             <input
               type="email"
+              name="email"
               placeholder="Enter your email"
               className="w-full py-3 bg-transparent outline-none text-sm text-gray-800 dark:text-white placeholder:text-gray-400"
               required
@@ -57,6 +88,7 @@ const ContactUs = () => {
 
           <textarea
             rows={7}
+            name="message"
             placeholder="Enter your message"
             className="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-white placeholder:text-gray-400 p-4 outline-none resize-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-300"
             required
