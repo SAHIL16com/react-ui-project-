@@ -2,8 +2,9 @@ import React from 'react'
 import assets from '../assets/assets.js'
 import Title from './Title.jsx'
 import ServiceCard from './ServiceCard.jsx'
+import { motion } from "motion/react"
 
-const Services = () => {
+const  Services = () => {
 
     const servicesData =[
         {
@@ -29,7 +30,13 @@ const Services = () => {
     ]
 
   return (
-    <div id='services' className ='relative flex flex-col items-center gap-7 px-4 sm:px-12 lg:px-24 xl:px-40 pt-30 text-gray-700 dark:text-white '>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 1.3, ease: 'easeout' }}
+      viewport={{ once: true }}
+    
+    id='services' className ='relative flex flex-col items-center gap-7 px-4 sm:px-12 lg:px-24 xl:px-40 pt-30 text-gray-700 dark:text-white '>
       <img src={assets.bgImage2} alt="" className='absolute -top-110 -left-70 z-1 dark:hidden'/>
       
       <div className =' relati ve flex flex-col items-center z-10' >
@@ -41,7 +48,7 @@ const Services = () => {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

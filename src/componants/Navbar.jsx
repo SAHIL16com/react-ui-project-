@@ -2,6 +2,7 @@ import React from 'react'
 import assets from '../assets/assets.js'
 import { useState } from 'react'
 import ThemeToggleBtn from './ThemeToggleBtn.jsx';
+import { motion } from "motion/react"
 
 
 
@@ -11,7 +12,12 @@ const Navbar = ({ theme, setTheme }) => {
 
 
     return (
-        <div className='flex justify-between items-center px-4 sm:px-12 lg:px-24 xl:px-40 py-4 sticky top-0 z-20 backdrop-blur-xl font-medium bg-white/50 dark:bg-gray-900/70'>
+        <motion.div 
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 , ease : 'easeout' }}
+        
+        className='flex justify-between items-center px-4 sm:px-12 lg:px-24 xl:px-40 py-4 sticky top-0 z-20 backdrop-blur-xl font-medium bg-white/50 dark:bg-gray-900/70'>
 
             <img src={theme === 'dark' ? assets.logo_dark : assets.logo} alt="" className='w-32 sm:w-40' />
 
@@ -35,11 +41,7 @@ const Navbar = ({ theme, setTheme }) => {
                     Connect <img src={assets.arrow_icon} width={14} alt="" />
                 </a>
             </div>
-
-
-        </div>
-
-
+        </motion.div>
     )
 }
 
